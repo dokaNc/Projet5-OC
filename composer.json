@@ -1,0 +1,15 @@
+{
+    "name": "oc/projet5",
+    "description": "create personnal blog",
+    "type": "library",
+    "require": {
+        "twig/twig": "^2.11"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dogukan Cirpan",
+            "email": "cirpan.dogukan5959@gmail.com"
+        }
+    ]
+}
