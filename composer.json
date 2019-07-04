@@ -1,15 +1,19 @@
 {
     "name": "oc/projet5",
-    "description": "create personnal blog",
+    "version": "0.1.0",
     "type": "library",
-    "require": {
-        "twig/twig": "^2.11"
-    },
+    "description": "Create your first blog in PHP",
     "license": "MIT",
     "authors": [
         {
             "name": "Dogukan Cirpan",
             "email": "cirpan.dogukan5959@gmail.com"
         }
-    ]
+    ],
+    "require": {
+        "twig/twig": "^2.11"
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.6"
+    }
 }
