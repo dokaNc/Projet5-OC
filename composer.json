@@ -1,0 +1,24 @@
+{
+    "name": "oc/projet5",
+    "version": "0.1.0",
+    "type": "library",
+    "description": "Create your first blog in PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dogukan Cirpan",
+            "email": "cirpan.dogukan5959@gmail.com"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "": "src/Controllers"
+      }
+    },
+    "require": {
+        "twig/twig": "^2.11"
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.6"
+    }
+}
