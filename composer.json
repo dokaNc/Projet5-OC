@@ -10,6 +10,11 @@
             "email": "cirpan.dogukan5959@gmail.com"
         }
     ],
+    "autoload": {
+      "psr-4": {
+        "": "src/Controllers"
+      }
+    },
     "require": {
         "twig/twig": "^2.11"
     },
