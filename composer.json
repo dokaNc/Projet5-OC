@@ -1,5 +1,5 @@
 {
-    "name": "oc/projet5",
+    "name": "dokan/projet5",
     "version": "0.1.0",
     "type": "library",
     "description": "Create your first blog in PHP",
@@ -12,7 +12,7 @@
     ],
     "autoload": {
       "psr-4": {
-        "": "src/Controllers"
+        "App\\": "src/"
       }
     },
     "require": {
@@ -21,4 +21,4 @@
     "require-dev": {
         "tracy/tracy": "^2.6"
     }
-}
+  }
