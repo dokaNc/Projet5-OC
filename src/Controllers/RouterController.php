@@ -1,13 +1,13 @@
 <?php
 
-    namespace Controller;
+    namespace App\Controller;
 
     use Twig\Environment;
     use Twig\Loader\FilesystemLoader;
 
     class RouterController
     {
-        const DEFAULT_PATH = 'Controller\\';
+        const DEFAULT_PATH = 'App\Controller\\';
         const DEFAULT_CONTROLLER  = 'IndexController';
 
         public $twig;
@@ -25,11 +25,12 @@
 
         public function route() {
             $page = ucfirst(filter_input(INPUT_GET, 'page'));
+           
             if (!$page) {
                 $controller = new IndexController();
                 $controller->defaultAction($this->twig);
-            } else if (class_exists('Controller\\'.$page.'Controller')) {
-                $namespace = "\Controller\\".$page."Controller";
+            } else if (class_exists('App\Controller\\'.$page.'Controller')) {
+                $namespace = "App\Controller\\".$page."Controller";
                 $controller = new $namespace;
                 $controller->defaultAction($this->twig);
             } else {
