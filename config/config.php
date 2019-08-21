@@ -1,5 +1,5 @@
 <?php
-    $host = 'localhost';
-    $dbname = 'dogukan_blog';
-    $username = 'root';
-    $password = '';
+define('DB_NAME', 'dokan_blog');
+define('DB_USER', 'root');
+define('DB_PWD', 'root');
+define('HOST_NAME', 'localhost');
