@@ -11,7 +11,7 @@ abstract class Manager
 
     public function connectDB()
     {
-        require_once ('../config/config.php');
+        require_once '../config/config.php';
 
         if ((self::$dtb) === null) {
             $dtb = new PDO('mysql:host=' . HOST_NAME . ';dbname=' . DB_NAME . ';charset=utf8', DB_USER, DB_PWD);
