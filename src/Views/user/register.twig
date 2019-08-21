@@ -1,0 +1,71 @@
+{% extends 'layout/layout.twig' %}
+
+{% block title %}
+<title>S'enregistrer</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Inscrivez-vous aujoud'hui !</h5>
+                    <form class="form-register" method="post">
+                        <div class="form-label-group">
+                            <input type="text" id="firstname" name="firstname" placeholder="Votre prénom"
+                                value="{{ data.firstname }}" class="form-control ftext" required>
+                            <label for="firstname">Prénom</label>
+
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="lastname" name="lastname" placeholder="Votre nom"
+                                value="{{ data.lastname }}" class="form-control ftext" required>
+                            <label for="lastname">Nom</label>
+
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="email" id="email" name="email" class="form-control ftext"
+                                placeholder="Votre email" value="{{ data.email }}" required>
+                            <label for="email">Adresse e-mail</label>
+
+                            <small class="form-text text-danger">{{ error.email }}</small>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="text" id="username" name="username" placeholder="Votre pseudo"
+                                value="{{ data.username }}" class="form-control ftext" required>
+                            <label for="username">Pseudonyme</label>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-label-group">
+                            <input type="password" id="password" name="password" placeholder="******"
+                                class="form-control ftext" required>
+                            <label for="password">Mot de passe</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" id="passwordconfirm" name="passwordconfirm" placeholder="******"
+                                class="form-control ftext" required>
+                            <label for="passwordconfirm">Confirmer mot de passe</label>
+                        </div>
+
+                        <hr>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">S'enregistrer
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
