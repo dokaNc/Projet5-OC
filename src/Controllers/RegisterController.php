@@ -13,13 +13,14 @@
             $register = new UserManager();
 
             if (isset($_POST['username'])){
-                $data = array(
-                    "username" => $_POST['username'],
-                    "firstname" => $_POST['firstname'],
-                    "lastname" => $_POST['lastname'],
-                    "email" => $_POST['email'],
-                    "password" => $_POST['password'],
-                );
+
+                    $data['username'] = filter_input(INPUT_POST, 'username');
+                    $data['email'] = filter_input(INPUT_POST, 'email');
+                    $data['password'] = filter_input(INPUT_POST, 'password');
+                    $data['password2'] = filter_input(INPUT_POST, 'passwordconfirm');
+                    $data['firstname'] = filter_input(INPUT_POST, 'firstname');
+                    $data['lastname'] = filter_input(INPUT_POST, 'lastname');
+              
 
                 $register->createUser($data);
 
