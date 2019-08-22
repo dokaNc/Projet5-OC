@@ -23,4 +23,44 @@
     </div>
 </div>
 
+<div class="well well-sm">
+    <form class="form-horizontal" action="" method="post">
+        <fieldset>
+            <legend class="text-center">Contactez moi</legend>
+
+            <!-- Name input-->
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="name">Nom Prénom</label>
+                <div class="col-md-12">
+                    <input id="name" name="name" type="text" placeholder="Nom Prénom" class="form-control">
+                </div>
+            </div>
+
+            <!-- Email input-->
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="email">Adresse e-mail</label>
+                <div class="col-md-12">
+                    <input id="email" name="email" type="text" placeholder="Adresse e-mail" class="form-control">
+                </div>
+            </div>
+
+            <!-- Message body -->
+            <div class="form-group">
+                <label class="col-md-3 control-label" for="message">Votre message</label>
+                <div class="col-md-12">
+                    <textarea class="form-control" id="message" name="message"
+                        placeholder="Veuillez entrer votre message ..." rows="5"></textarea>
+                </div>
+            </div>
+
+            <!-- Form actions -->
+            <div class="form-group">
+                <div class="col-md-1 text-right">
+                    <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
 {% endblock %}
