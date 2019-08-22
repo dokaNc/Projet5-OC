@@ -17,8 +17,8 @@
 
 /* Register Form */
 .form-register {
-  --input-padding-x: 1.5rem;
-  --input-padding-y: .75rem;
+  input-padding-x: 1.5rem;
+  input-padding-y: .75rem;
 }
 
 
