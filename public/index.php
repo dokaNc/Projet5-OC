@@ -1,7 +1,6 @@
 <?php
 
 use App\Controller\RouterController;
-use App\Controller\IndexController;
 
 require_once '../vendor/autoload.php';
 
