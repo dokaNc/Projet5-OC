@@ -9,11 +9,13 @@
     {
         const DEFAULT_PATH = 'App\Controller\\';
         const DEFAULT_CONTROLLER  = 'IndexController';
+        const DEFAULT_ACTION = 'defaultAction'
 
         public $twig;
 
         protected $controller = self::DEFAULT_CONTROLLER;
 
+        protected $action = self::DEFAULT_ACTION;
 
         public function __construct() {
             $this->twigLoader();
@@ -46,6 +48,14 @@
             $response = call_user_func([$this->controller, $this->action]);
             echo filter_var($response);
 
+            }
+
+            public function setAction()
+            {
+                $this->action = strtolower($this->action) . 'Action';
+                if (!method_exists($this->controller, $this->action)) {
+                    $this->action = self::DEFAULT_ACTION;
+                }
             }
         }
     
