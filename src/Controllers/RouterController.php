@@ -12,6 +12,9 @@
 
         public $twig;
 
+        protected $controller = self::DEFAULT_CONTROLLER;
+
+
         public function __construct() {
             $this->twigLoader();
         }
@@ -24,18 +27,25 @@
         }
 
         public function route() {
-            $page = ucfirst(filter_input(INPUT_GET, 'page'));
-           
-            if (!$page) {
-                $controller = new IndexController();
-                $controller->defaultAction($this->twig);
-            } else if (class_exists('App\Controller\\'.$page.'Controller')) {
-                $namespace = "App\Controller\\".$page."Controller";
-                $controller = new $namespace;
-                $controller->defaultAction($this->twig);
+            $urlParams = ucfirst(filter_input(INPUT_GET, 'page'));
+            $urlParams = explode('!', $urlParams);
+
+            $this->action = count($urlParams) == 1 ? 'index' : $urlParams[1];
+
+            if (!$urlParams[0]) {
+                $this->controller = new IndexController($this->twig);
+            } else if (class_exists(self::DEFAULT_PATH.$urlParams[0].'Controller')) {
+                $namespace = self::DEFAULT_PATH.$urlParams[0]."Controller";
+                $this->controller = new $namespace($this->twig);
             } else {
-                $controller = new HandlerController();
-                $controller->defaultAction($this->twig);
+                $this->controller = new HandlerController($this->twig);
+            }
+
+            $this->setAction();
+
+            $response = call_user_func([$this->controller, $this->action]);
+            echo filter_var($response);
+
             }
         }
-    }
+    
