@@ -1,9 +1,8 @@
 <?php
 
-use App\Controller\RouterController;
+use App\Controller\FrontController;
 
 require_once '../vendor/autoload.php';
 
-$router = new RouterController();
-$twig = $router->twig;
-$router->route();
+$frontController = new FrontController();
+$frontController->run();
