@@ -13,4 +13,26 @@
             
             return $requete;
         }
+
+        public function checkUser($email)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare('SELECT email FROM users WHERE  email = ? LIMIT 1');
+            $req->execute(array($email));
+            if ($req->fetchColumn()) {
+    
+                return true;
+            }
+            return false;
+        }
+
+        public function getUser(string $email)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare('SELECT * FROM users WHERE email= ?');
+            $req->execute(array($email));
+            $req = $req->fetch();
+    
+            return $req;
+        }
     }
