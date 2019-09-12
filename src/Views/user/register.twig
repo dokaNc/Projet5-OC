@@ -9,6 +9,21 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
+
+            {% if success == true %}
+            <div class="alert alert-success" role="alert">
+                <center>Merci pour votre inscription !</center>
+            </div>
+            {% elseif errors|length > 0 %}
+            <div class="alert alert-danger" role="alert">
+                <center>
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </center>
+            </div>
+            {% endif %}
+
             <div class="card card-signin flex-row my-5">
                 <div class="card-img-left d-none d-md-flex">
                 </div>
@@ -59,7 +74,7 @@
 
                         <hr>
 
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">S'enregistrer
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit">S'enregistrer
                         </button>
                     </form>
                 </div>

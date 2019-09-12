@@ -1,10 +1,12 @@
 <?php
 
-use App\Controller\RouterController;
-use App\Controller\IndexController;
+use App\Controller\FrontController;
 
 require_once '../vendor/autoload.php';
 
-$router = new RouterController();
-$twig = $router->twig;
-$router->route();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+$frontController = new FrontController();
+$frontController->run();
