@@ -1,15 +1,17 @@
 <?php
 
-    namespace App\Controller;
+namespace App\Controller;
 
-    use App\Model\UserManager;
+use App\Model\UserManager;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
-    class UserController {
-
-        protected $twig;
+    class UserController extends Controller {
         
-        public function __construct($twig) {
-            $this->twig = $twig;
+        public function indexAction()
+        {
+            return $this->render('user/register.twig');
         }
 
         public function registerAction() {
@@ -29,7 +31,8 @@
                     "lastname" => filter_input(INPUT_POST, 'lastname')
                 );
 
-                if ($data['password'] != $data['password2']) {
+
+                if ($data['password']  != $data['password2']) {
                     array_push($errors, 'Les mots de passe ne sont pas identiques.');
                 }
 
@@ -50,9 +53,4 @@
             ]);
         }
 
-        public function defaultAction() {
-            //return $this->twig->render('user/index.twig');
-            header("Status: 301 Moved Permanently", false, 301);
-            header("Location: index.php");
-        }
     }
