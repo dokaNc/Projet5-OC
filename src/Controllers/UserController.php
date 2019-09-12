@@ -41,8 +41,8 @@ use Twig\Error\SyntaxError;
                 }
 
                 if (count($errors) == 0 && count(array_filter($data)) === 6) {
-                    // tous les champs sont remplis.
                     $success = true;
+                    $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
                     $register->createUser($data);
                 }
             }
@@ -53,4 +53,38 @@ use Twig\Error\SyntaxError;
             ]);
         }
 
+        public function loginAction()
+        {
+            $email = filter_input(INPUT_POST, 'emaillog', FILTER_SANITIZE_SPECIAL_CHARS);
+            $password = filter_input(INPUT_POST, 'passwordlog', FILTER_SANITIZE_STRING);
+    
+            if (!empty($email) and !empty($password)) {
+                $userManager = new UserManager();
+                $info = $userManager->checkUser($email);
+                if ($info !== false) {
+                    $info = $userManager->getUser($email);
+                    if (password_verify($password, $info['password']) === true) {
+                        $status = $this->session->checkStatus($info['status']);
+                        $this->session->createSession($info['id'], $info['username'], $info['email'], $status);
+                        $this->alert("Vous êtes maintenant connecté sur le blog !");
+    
+                        return $this->render('home.twig', array('session' => filter_var_array($_SESSION)));
+                    }
+                }
+                $this->alert('Vous avez saisis des informations incorrects !');
+    
+                return $this->render("home.twig");
+            }
+            $this->alert("Tout les champs ne sont pas remplis !");
+    
+            return $this->render("home.twig");
+        }
+
+        public function logoutAction()
+        {
+            if ($this->session->isLogged()) {
+                $this->session->destroySession();
+            }
+            return $this->render('home.twig', array('session' => filter_var_array($_SESSION)));
+        }
     }
