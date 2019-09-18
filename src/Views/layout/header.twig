@@ -11,9 +11,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="../public/">Accueil</a>
                 </li>
+                {% if session.user.username is defined %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="../public/?page=user!register">S'enregistrer</a>
+                    <a class="nav-link" href="../public/?page=user!edit">Mon Profil</a>
                 </li>
+                {% endif %}
             </ul>
 
             {% if session.user.username is defined %}
@@ -22,41 +24,14 @@
                 <p class="font-weight-bolder nav-item ml-2 d-inline"> Bonjour {{ session.user.username }}</p>
             </div>
             {% else %}
-            <div class=" rounded-top my-2 my-lg-0">
-                <a class="btn btn-warning ml-auto" data-toggle="modal" data-target="#login">Se connecter</a>
+            <div>
+                <a class="btn btn-warning ml-auto" href="../public/?page=user!register">S'inscrire | Se connecter</a>
             </div>
             {% endif %}
         </div>
     </div>
 </nav>
 
-<!-- login  -->
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title font-weight-bold">Identification</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">x</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="form-group has-success connect " method="post" action="../public/?page=user!login">
-                    <label for="emaillog" class="col-form-label">Votre email :</label>
-                    <input class="form-control ftext" id="emaillog" name="emaillog" type="email" value="{{ email }}"
-                        placeholder="Email">
-                    <small class="form-text text-danger">{{ error.emailLog }}</small>
-                    <label for="passwordlog" class="col-form-label">Votre password :</label>
-                    <input class="form-control ftext" id="passwordlog" name="passwordlog" type="password"
-                        placeholder="******">
-                    <small class="form-text text-danger">{{ error.passwordLog }}</small>
-                    <button class="btn btn-outline-dark btn-md mt-3 mx-auto" type="submit">Connexion</button>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
 <!-- logout -->
 <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="logout" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">

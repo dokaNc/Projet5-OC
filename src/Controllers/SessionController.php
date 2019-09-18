@@ -52,4 +52,13 @@ class SessionController
         return false;
     }
 
+    public function getUserVar($var)
+    {
+        if ($this->isLogged() === false) {
+
+            return null;
+        }
+        return $this->user[$var];
+    }
+
 }

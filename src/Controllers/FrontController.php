@@ -32,6 +32,7 @@ class FrontController extends Controller
             'cache' => false,
             'debug' => true
         ));
+        $twig->addGlobal('session', filter_var_array($_SESSION));
         $this->twig = $twig;
     }
 
