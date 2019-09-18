@@ -1,0 +1,43 @@
+{% extends 'layout/layout.twig' %}
+
+{% block content %}
+<!-- Profil Form -->
+<div class="container">
+    <form method="post" name="update" enctype="multipart/form-data" action="../public/?page=user!update">
+        <div class="row has-success mt-1">
+            <h3 class="col-12 mt-3 border-bottom text-center"><b>Bienvenue sur votre profil : </b>{{ data.firstname }}
+                {{ data.lastname }}</h3><br>
+            <div class="form-group mt-3 col-lg-6 col-md-12">
+                <label for="email"><b>E-mail actuel :</b> {{ data.email }}</label>
+                <input type="email" id="email" name="email" class="form-control ftext" placeholder="Nouveau e-mail">
+                <small class="form-text text-danger">{{ error.email }}</small>
+
+                <label for="username"><b>Pseudo actuel :</b> {{ data.username }}</label>
+                <input type="text" id="username" name="username" class="form-control ftext"
+                    placeholder="Nouveau pseudo">
+                <small class="form-text text-danger">{{ error.username }}</small>
+            </div>
+
+            <h3 class="col-12 mt-4"><b>Modifier votre mot de passe</b></h3>
+            <div class="form-group mt-3 col-lg-4 col-md-12">
+                <label for="oldpassword"><b>Ancien mot de passe</b></label>
+                <input type="password" id="oldpassword" name="oldpassword" class="form-control ftext"
+                    placeholder="******">
+                <small class="form-text text-danger">{{ error.password0 }}</small>
+
+                <label for="newpassword"><b>Nouveau mot de passe</b></label>
+                <input type="password" id="newpassword" name="newpassword" class="form-control ftext"
+                    placeholder="******">
+                <small class="form-text text-danger">{{ error.password }}</small>
+
+                <label for="passwordconfirm"><b>Confirmer nouveau mot de passe</b></label>
+                <input type="password" id="passwordconfirm" name="passwordconfirm" class="form-control ftext"
+                    placeholder="******">
+                <button type="submit" name="submit" class="btn btn-outline-dark mt-4 mx-auto mb-5">Sauvegarder <i
+                        class="far fa-save"></i>
+                </button>
+            </div>
+    </form>
+</div>
+</div>
+{% endblock %}
