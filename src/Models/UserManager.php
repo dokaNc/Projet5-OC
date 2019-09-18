@@ -36,6 +36,13 @@
             return $req;
         }
 
+        public function update($data, $row, $email)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare("UPDATE users SET $row = ? WHERE email = ? ");
+            $req->execute(array($data, $email));
+        }
+
         public function checkUsername(string $username)
         {
             $dtb = $this->connectDB();
