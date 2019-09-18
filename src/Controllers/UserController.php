@@ -160,4 +160,3 @@ use Twig\Error\SyntaxError;
             return $data;
         }
     }
-    }
