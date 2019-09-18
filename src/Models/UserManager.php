@@ -35,4 +35,16 @@
     
             return $req;
         }
+
+        public function checkUsername(string $username)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare('SELECT username FROM users WHERE  username = ? LIMIT 1');
+            $req->execute(array($username));
+            if ($req->fetchColumn()) {
+    
+                return true;
+            }
+            return false;
+        }
     }
