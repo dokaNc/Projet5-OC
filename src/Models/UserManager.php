@@ -16,10 +16,10 @@
 
         public function checkUser($email)
         {
-            $dtb = $this->connectDB();
-            $req = $dtb->prepare('SELECT email FROM users WHERE  email = ? LIMIT 1');
-            $req->execute(array($email));
-            if ($req->fetchColumn()) {
+            $database = $this->connectDB();
+            $requete = $database->prepare('SELECT email FROM users WHERE  email = ? LIMIT 1');
+            $requete->execute(array($email));
+            if ($requete->fetchColumn()) {
     
                 return true;
             }
@@ -28,27 +28,27 @@
 
         public function getUser(string $email)
         {
-            $dtb = $this->connectDB();
-            $req = $dtb->prepare('SELECT * FROM users WHERE email= ?');
-            $req->execute(array($email));
-            $req = $req->fetch();
+            $database = $this->connectDB();
+            $requete = $database->prepare('SELECT * FROM users WHERE email= ?');
+            $requete->execute(array($email));
+            $requete = $requete->fetch();
     
-            return $req;
+            return $requete;
         }
 
         public function update($data, $row, $email)
         {
-            $dtb = $this->connectDB();
-            $req = $dtb->prepare("UPDATE users SET $row = ? WHERE email = ? ");
-            $req->execute(array($data, $email));
+            $database = $this->connectDB();
+            $requete = $database->prepare("UPDATE users SET $row = ? WHERE email = ? ");
+            $requete->execute(array($data, $email));
         }
 
         public function checkUsername(string $username)
         {
-            $dtb = $this->connectDB();
-            $req = $dtb->prepare('SELECT username FROM users WHERE  username = ? LIMIT 1');
-            $req->execute(array($username));
-            if ($req->fetchColumn()) {
+            $database = $this->connectDB();
+            $requete = $database->prepare('SELECT username FROM users WHERE  username = ? LIMIT 1');
+            $requete->execute(array($username));
+            if ($requete->fetchColumn()) {
     
                 return true;
             }
