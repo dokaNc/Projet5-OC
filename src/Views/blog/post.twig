@@ -1,0 +1,69 @@
+{% extends 'layout/layout.twig' %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <!-- Pager -->
+        <div class="clearfix mr-auto mt-2">
+            <a class="btn btn-outline-dark" href="../public/?p={{ p }}&page=blog">&larr; Retour</a>
+        </div>
+        <div class="col-12 text-center mt-3">
+            <article class="post">
+
+                <h2 class="post-title">
+                    {{ post.title }}
+                </h2>
+                <h3 class="post-subtitle">
+                    {{ post.headline }}
+                </h3>
+
+                <p class="text-justify">{{ post.content }}</p>
+                <br>
+                <p class="post-meta">Posté par
+                    <strong>{{ post.author }}</strong> le <em>{{ post.add_date | date("d/m/Y G:i:s") }}</em></p>
+            </article>
+        </div>
+        <div class="col-12 mt-5">
+            <hr>
+            <h2>Commentaires :</h2>
+            {% for comment in comment %}
+            <p class="mt-3"><b>{{ comment.author }}</b></p>
+            <p class="text-justify">{{ comment.content }}<br><em
+                    class="float-right">{{ comment.add_date | date("d/m/Y G:i:s") }}</em></p>
+            <hr>
+            {% endfor %}
+            {% if wcomment is defined %}
+            {% for wcomment in wcomment %}
+            <div class="wcomment">
+                <p>En attente de modération<br>
+                    <b>{{ wcomment.author }}</b></p>
+                <p class="text-justify">{{ wcomment.content }}<br><em
+                        class="float-right">{{ wcomment.add_date | date("d/m/Y G:i:s") }}</em></p>
+
+                <hr>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <form class="mt-5" enctype="multipart/form-data" method="post"
+                action="../public/?id={{ post.id }}&p={{ p }}&page=blog!comment">
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls has-success">
+                        <label class="font-weight-bold" for="comment">Commenter :</label>
+                        <textarea rows="2" class="form-control ftext" id="comment" placeholder="Votre message"
+                            name="comment" required
+                            data-validation-required-message="Veuillez entrer votre commentaire."></textarea>
+                        <small class="form-text text-muted">Connexion nécessaire</small>
+                    </div>
+                </div>
+                {% if session.user.username is defined %}
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-dark">Soumettre <i
+                            class="fas fa-paper-plane"></i></button>
+                </div>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
