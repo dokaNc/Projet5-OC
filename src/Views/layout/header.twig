@@ -21,10 +21,22 @@
                 {% endif %}
             </ul>
 
+            {% if session.user.status == true %}
+            <div>
+
+                <a class="btn btn-success ml-auto" style="margin-right: 10px"
+                    href="../public/?page=admin">Administration</a>
+
+            </div>
+
+            {% endif %}
+
             {% if session.user.username is defined %}
             <div class="rounded-top my-2 my-lg-0">
-                <a class="btn btn-danger ml-auto" data-toggle="modal" data-target="#logout">Se déconnecter</a>
-                <p class="font-weight-bolder nav-item ml-2 d-inline"> Bonjour {{ session.user.username }}</p>
+                <a class="btn btn-danger ml-auto" data-toggle="modal" style="color: white" data-target="#logout">Se
+                    déconnecter</a>
+                <p class="font-weight-bolder nav-item ml-2 d-inline" style="color: white">
+                    Bonjour {{ session.user.username }}</p>
             </div>
             {% else %}
             <div>
