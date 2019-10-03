@@ -42,4 +42,21 @@ class PostManager extends Manager
         return $requete->fetchAll();
     }
 
+    public function updatePost($data)
+    {
+        $dtb = $this->connectDB();
+        $req = $dtb->prepare('UPDATE posts SET title = ?, author = ?, headline = ? , content = ? , add_date = NOW() WHERE id =  ? ');
+        $req->execute(array($data['title'], $data['author'], $data['headline'], $data['content'], $data['idy']));
+
+        return true;
+    }
+
+    public function deletePost(int $idy)
+    {
+        $dtb = $this->connectDB();
+        $req = $dtb->prepare('DELETE FROM posts WHERE id = ?');
+        $req->execute(array($idy));
+
+        return true;
+    }
 }
