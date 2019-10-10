@@ -1,17 +1,22 @@
-/* Contact Form */
-.well-sm {
-  padding: 9px;
-  border-radius: 3px;
+/* Header Home Page */
+.box-header {
+  color: white;
+  border-radius: 5px;
+  padding-bottom: 2%;
+  padding-top: 2%;
+  background-color: #343a40;
 }
 
-.well {
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
-  border-radius: 4px;
-  box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+article img {
+  border-radius: 5px;
+}
+
+/* Contact Form */
+.box-form {
+  margin-bottom: 5%;
+  color: white;
+  border-radius: 5px;
+  background-color: #343a40;
 }
 
 

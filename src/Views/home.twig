@@ -6,75 +6,72 @@
 
 {% block content %}
 
-<div class="row align-items-center my-5">
-    <div class="col-lg-4">
-        <img class="img" src="./img/photo.jpg" alt="">
+<article>
+    <div class="row align-items-center my-5 box-header">
+        <div class="col-lg-5">
+            <img class="img" src="./img/photo.jpg" alt="">
 
+        </div>
+        <div class="col-lg-5">
+            <h1 class="font-weight-light">CIRPAN Dogukan</h1>
+            <p style="text-align:justify">Actuellement en formation Développeur d'application - PHP / Symfony chez
+                Openclassrooms.
+                Ma réussite professionnelle étant mon objectif principal, je souhaite acquérir de l'expérience dans
+                divers
+                domaines tels que le développement d'applications php et javascript. Je suis capable de travailler en
+                autonomie dans un environnement dynamique. L'informatique a toujours été une passion et je souhaite en
+                faire
+                mon métier.</p>
+            <a class="btn btn-primary" href="../public/img/CV_Dogukan.pdf">Afficher mon CV</a>
+        </div>
     </div>
-    <div class="col-lg-8">
-        <h1 class="font-weight-light">CIRPAN Dogukan</h1>
-        <p style="text-align:justify">Actuellement en formation Développeur d'application - PHP / Symfony chez
-            Openclassrooms.
-            Ma réussite professionnelle étant mon objectif principal, je souhaite acquérir de l'expérience dans divers
-            domaines tels que le développement d'applications php et javascript. Je suis capable de travailler en
-            autonomie dans un environnement dynamique. L'informatique a toujours été une passion et je souhaite en faire
-            mon métier.</p>
-        <a class="btn btn-primary" href="#">Télécharger mon CV</a>
+</article>
+
+<!-- Contact Form -->
+<div class="row has-success box-form">
+    <div class="col-lg-12 mx-auto mt-5">
+        <h3 class="mb-3 border-bottom text-center col-12">Me contacter</h3>
+
+        <form name="sentMessage" id="contactForm" method="post" action="../public/?page=home!email">
+            <div class="control-group">
+                <div class="form-group  floating-label-form-group controls">
+                    <label for="name">Votre Nom</label>
+                    <input type="text" class="form-control ftext" id="name" placeholder="Nom" name="name" required
+                        data-validation-required-message="Veuillez entrer votre nom.">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label for="telephone">Téléphone</label>
+                    <input type="tel" class="form-control ftext" id="telephone" placeholder="Numéro" name="telephone"
+                        required data-validation-required-message="Veuillez entrer votre phone numéro de téléphone.">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control ftext" id="email" placeholder="Adresse email"
+                        name="email_from" required
+                        data-validation-required-message="Veuillez entrer votre adresse email.">
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="form-group floating-label-form-group controls">
+                    <label for="comments">Votre Message</label>
+                    <textarea rows="4" class="form-control ftext" id="comments" placeholder="Message" name="comments"
+                        required data-validation-required-message="Veuillez entrer votre message."></textarea>
+                    <p class="help-block text-danger"></p>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary" name="email">Envoyer votre message<i
+                        class="fas fa-paper-plane"></i></button>
+            </div>
+        </form>
     </div>
-</div>
-
-{% if form_success == true %}
-<div class="alert alert-success" role="alert">
-    <center>Votre messsage a bien été envoyé !</center>
-</div>
-{% elseif errors|length > 0 %}
-<div class="alert alert-danger" role="alert">
-    <center>
-        {% for error in errors %}
-        <li>{{ error }}</li>
-        {% endfor %}
-    </center>
-</div>
-{% endif %}
-
-<div class="well well-sm">
-    <form class="form-horizontal" method="post">
-        <fieldset>
-            <legend class="text-center">Contactez moi</legend>
-
-            <!-- Name input-->
-            <div class="form-group">
-                <label class="col-md-3 control-label" for="name">Nom Prénom</label>
-                <div class="col-md-12">
-                    <input id="name" name="name" type="text" placeholder="Nom Prénom" class="form-control">
-                </div>
-            </div>
-
-            <!-- Email input-->
-            <div class="form-group">
-                <label class="col-md-3 control-label" for="email">Adresse e-mail</label>
-                <div class="col-md-12">
-                    <input id="email" name="email" type="text" placeholder="Adresse e-mail" class="form-control">
-                </div>
-            </div>
-
-            <!-- Message body -->
-            <div class="form-group">
-                <label class="col-md-3 control-label" for="message">Votre message</label>
-                <div class="col-md-12">
-                    <textarea class="form-control" id="message" name="message"
-                        placeholder="Veuillez entrer votre message ..." rows="5"></textarea>
-                </div>
-            </div>
-
-            <!-- Form actions -->
-            <div class="form-group">
-                <div class="col-md-1 text-right">
-                    <button type="submit" class="btn btn-primary btn-lg">Envoyer</button>
-                </div>
-            </div>
-        </fieldset>
-    </form>
 </div>
 
 {% endblock %}
