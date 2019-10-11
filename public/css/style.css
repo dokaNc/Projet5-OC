@@ -1,10 +1,24 @@
+/* Nav Bar */
+.navbar-nav li {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.navbar-nav li {
+  border-right: 1px solid #ffffff;
+  }
+
+.navbar-nav li:last-child {
+    border-right: none
+    }
+
 /* Header Home Page */
 .box-header {
   color: white;
   border-radius: 5px;
   padding-bottom: 2%;
   padding-top: 2%;
-  background-color: #343a40;
+  background: linear-gradient(#25292d, #2f3c4a);
 }
 
 article img {
@@ -16,7 +30,7 @@ article img {
   margin-bottom: 5%;
   color: white;
   border-radius: 5px;
-  background-color: #343a40;
+  background: linear-gradient(#2f3c4a, #25292d);
 }
 
 
