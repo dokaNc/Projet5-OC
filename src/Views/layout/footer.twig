@@ -17,7 +17,15 @@
                 </a>
             </li>
         </ul>
-        <p class="m-0 text-center text-white">Copyright © CIRPAN Dogukan 2019
-        </p>
+
+        <div class="text-center">
+            {% if session.user.status == true %}
+            <a class="btn btn-success" style="margin-bottom: 2%" href="../public/?page=admin">Administration</a>
+            {% endif %}
+
+            <p class="text-white">Copyright © CIRPAN Dogukan 2019
+            </p>
+        </div>
+
     </div>
 </footer>
