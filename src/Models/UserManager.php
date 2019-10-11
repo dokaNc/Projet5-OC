@@ -54,4 +54,21 @@
             }
             return false;
         }
+
+        public function getAllUsers()
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare("SELECT * FROM users WHERE status='normal' ORDER BY username");
+            $req->execute();
+            $req = $req->fetchAll();
+    
+            return $req;
+        }
+
+        public function deleteUser(int $idy)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare("DELETE FROM users WHERE id = ? AND status = 'normal'");
+            $req->execute(array($idy));
+        }
     }

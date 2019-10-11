@@ -61,4 +61,15 @@ class SessionController
         return $this->user[$var];
     }
 
+    public function checkAdmin()
+    {
+        if ($this->isLogged()) {
+            if ($this->getUserVar('status') === '1') {
+
+                return true;
+            }
+            $this->destroySession();
+        }
+        return false;
+    }
 }

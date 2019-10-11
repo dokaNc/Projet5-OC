@@ -1,6 +1,31 @@
 <footer class="py-5 bg-dark">
     <div class="container">
-        <p class="m-0 text-center text-white">Copyright © CIRPAN Dogukan 2019
-        </p>
+        <ul class="list-inline text-center">
+            <li class="list-inline-item" style="font-size: 24px">
+                <a href="https://twitter.com/CirpanDogukan">
+                    Twitter
+                </a>
+            </li>
+            <li class="list-inline-item" style="font-size: 24px">
+                <a href="https://www.linkedin.com/in/dogukan-cirpan">
+                    Linkedin
+                </a>
+            </li>
+            <li class="list-inline-item" style="font-size: 24px">
+                <a href="https://github.com/dokanc">
+                    Github
+                </a>
+            </li>
+        </ul>
+
+        <div class="text-center">
+            {% if session.user.status == true %}
+            <a class="btn btn-success" style="margin-bottom: 2%" href="../public/?page=admin">Administration</a>
+            {% endif %}
+
+            <p class="text-white">Copyright © CIRPAN Dogukan 2019
+            </p>
+        </div>
+
     </div>
 </footer>

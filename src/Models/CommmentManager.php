@@ -40,4 +40,18 @@ class CommentManager extends Manager
 
         return $requete->fetchAll();
     }
+    
+        public function validateComment(int $idy)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare("UPDATE comments SET validation = 1 WHERE id = ? ");
+            $req->execute(array($idy));
+        }
+        
+        public function deleteComment(int $idy, $row)
+        {
+            $dtb = $this->connectDB();
+            $req = $dtb->prepare("DELETE FROM comments WHERE $row = ? ");
+            $req->execute(array($idy));
+        }
 }

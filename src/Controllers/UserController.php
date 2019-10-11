@@ -20,7 +20,7 @@ use Twig\Error\SyntaxError;
             $success = false;
             $errors = array();
 
-            if (count(filter_input(INPUT_POST, 'submit')) === 1) {
+            if (filter_has_var(INPUT_POST, 'submit')) {
 
                 $data = array(
                     "username" => filter_input(INPUT_POST, 'username'),

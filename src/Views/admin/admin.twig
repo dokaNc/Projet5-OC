@@ -1,0 +1,221 @@
+{% extends 'layout/layout.twig' %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="mt-3">ADMINISTRATION</h1>
+    <!-- Tab Menu -->
+    {% if confirm == false %}
+    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+        <li class="nav-item pillcolor">
+            <a class="nav-link {% if show == 0 %}active{% endif %}" id="pills-posts-tab" data-toggle="pill"
+                href="#pills-posts" role="tab" aria-controls="pills-posts"
+                aria-selected="{% if show == 0 %}true{% else %}false{% endif %}">Articles</a>
+        </li>
+        <li class="nav-item pillcolor ">
+            <a class="nav-link {% if show == 1 %}active{% endif %}" id="pills-comments-tab" data-toggle="pill"
+                href="#pills-comments" role="tab" aria-controls="pills-comments"
+                aria-selected="{% if show == 1 %}true{% else %}false{% endif %}">Commentaires</a>
+        </li>
+        <li class="nav-item pillcolor">
+            <a class="nav-link {% if show == 2 %}active{% endif %}" id="pills-users-tab" data-toggle="pill"
+                href="#pills-users" role="tab" aria-controls="pills-users"
+                aria-selected="{% if show == 2 %}true{% else %}false{% endif %}">Utilisateurs</a>
+        </li>
+        <li class="nav-item pillcolor">
+            <a class="nav-link" id="pills-newpost-tab" data-toggle="pill" href="#pills-newpost" role="tab"
+                aria-controls="pills-newpost" aria-selected="false">Création</a>
+        </li>
+    </ul>
+    {% endif %}
+    <div class="tab-content mb-4 mt-2" id="pills-tabContent">
+        <div class="tab-pane fade {% if show == 0 %}show active{% endif %}" id="pills-posts" role="tabpanel"
+            aria-labelledby="pills-posts-tab">
+            {% if confirm.table != 'post' %}
+            <div class="table-responsive table-hover">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="col" scope="col">Articles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in posts %}
+                        <tr>
+                            <td><b>Titre : </b>{{ post.title }} <br><b>Auteur : </b>{{ post.author }}<br><b>Date
+                                    : </b><em>{{ post.add_date | date("d/m/Y") }}</em><br>
+                                <div class="mt-1">
+                                    <a class="btn btnlink btn-sm btn-outline-dark"
+                                        href="../public/?id={{ post.id }}&page=admin!edit">Editer <i
+                                            class="far fa-edit"></i></a>
+                                    <a class="btn btnlink btn-sm btn-outline-danger"
+                                        href="../public/?id={{ post.id }}&table=post&page=admin!confirm">Supprimer
+                                        <i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                {% if confirm.table == 'post' and show == 0 %}
+                <div class="mt-5">
+                    <p class="h4 font-weight-bolder">Confirmation</p>
+                    <hr>
+                    <br>
+                    <p class="h5 font-weight-bold mb-3">Vous êtes sur le point de supprimer cet article ainsi
+                        que
+                        ses commentaires !<br>Souhaitez-vous continuer ?</p>
+                    <a class="btn btnlink btn-outline-danger"
+                        href="../public/?id={{ confirm.id }}&table=post&page=admin!delete">Confirmer <i
+                            class="fas fa-trash"></i></a>
+                    <a class="btn btnlink btn-outline-success"
+                        href="../public/?table=cancel&show=0&page=admin!confirm">Annuler</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="tab-pane fade {% if show == 1 %}show active{% endif %} mt-2" id="pills-comments" role="tabpanel"
+            aria-labelledby="pills-comments-tab">
+            {% if confirm.table != 'comment' %}
+            <div class="table-responsive table-hover">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="col" scope="col">Commentaires</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in comments %}
+
+                        <tr>
+                            <td><b>Auteur : </b>{{ comment.author }}<br>
+                                <b>Date : </b><em>{{ comment.add_date | date("d/m/Y G:i:s") }}</em>
+                                <br>
+                                <div class="text-justify">"{{ comment.content }}"</div>
+                                <div class="mt-1">
+                                    {% if comment.validation == 0 %}
+                                    <a class="btn btnlink btn-sm btn-outline-dark"
+                                        href="../public/?id={{ comment.id }}&page=admin!validate">
+                                        Valider <i class="fas fa-check"></i></a>
+                                    {% endif %}
+                                    <a class="btn btnlink btn-sm btn-outline-danger"
+                                        href="../public/?id={{ comment.id }}&table=comment&page=admin!confirm">Supprimer
+                                        <i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                {% if confirm.table == 'comment' and show == 1 %}
+                <div class="mt-5">
+                    <p class="h4 font-weight-bolder">Confirmation</p>
+                    <hr>
+                    <br>
+                    <p class="h5 font-weight-bold mb-3">Souhaitez-vous supprimer ce commentaire ?</p>
+                    <a class="btn btnlink btn-outline-danger"
+                        href="../public/?id={{ confirm.id }}&table=comment&page=admin!delete">Confirmer <i
+                            class="fas fa-trash"></i></a>
+                    <a class="btn btnlink btn-outline-success"
+                        href="../public/?table=cancel&show=1&page=admin!confirm">Annuler</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="tab-pane fade {% if show == 2 %}show active{% endif %} mt-2" id="pills-users" role="tabpanel"
+            aria-labelledby="pills-users-tab">
+            {% if confirm.table != 'user' %}
+            <div class="table-responsive table-hover">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="col" scope="col">Utilisateurs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in user %}
+                        <tr>
+                            <td><b>Utilisateur : </b>{{ user.username }}<br>
+                                <b>Nom : </b>{{ user.firstname }} {{ user.lastname }}<br>
+                                <b>Email : </b>{{ user.email }}
+                                <div class="mt-1">
+                                    <a class="btn btnlink btn-sm btn-outline-danger"
+                                        href="../public/?id={{ user.id }}&table=user&page=admin!confirm">Supprimer
+                                        <i class="fas fa-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+                {% if confirm.table == 'user' and show == 2 %}
+                <div class="mt-5">
+                    <p class="h4 font-weight-bolder">Confirmation</p>
+                    <hr>
+                    <br>
+                    <p class="h5 font-weight-bold mb-3">Vous êtes sur le point de supprimer cet
+                        utilisateur.<br>Souhaitez-vous
+                        continuer ?</p>
+                    <a class="btn btnlink btn-outline-danger"
+                        href="../public/?id={{ confirm.id }}&table=user&page=admin!delete">Confirmer <i
+                            class="fas fa-trash"></i></a>
+                    <a class="btn btnlink btn-outline-success"
+                        href="../public/?table=cancel&show=2&page=admin!confirm">Annuler</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="tab-pane fade" id="pills-newpost" role="tabpanel" aria-labelledby="pills-newpost-tab">
+
+            <form name="sentMessage" id="editForm" enctype="multipart/form-data" method="post"
+                action="../public/?page=admin!add">
+                <div class="has-success">
+                    <div class="col-lg-8 col-md-10 mx-auto mt-2">
+                        <h3 class="mb-3 border-bottom col-12">Edition</h3>
+
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label class="font-weight-bold" for="author">Auteur</label>
+                                <textarea rows="1" id="author" class="form-control ftext" name="author" required
+                                    data-validation-required-message="Veuillez indiquer l'auteur de l'article"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label class="font-weight-bold" for="title">Titre</label>
+                                <textarea rows="1" id="title" class="form-control ftext" name="title" required
+                                    data-validation-required-message="Veuillez indiquer le titre de l'article"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label class="font-weight-bold" for="headline">Headline</label>
+                                <textarea rows="1" id="headline" class="form-control ftext" name="headline" required
+                                    data-validation-required-message="Veuillez indiquer le lead de l'article"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="form-group floating-label-form-group controls">
+                                <label class="font-weight-bold" for="content">Article</label>
+                                <textarea rows="7" id="content" class="form-control ftext" name="content" required
+                                    data-validation-required-message="Veuillez indiquer le contenu de l'article"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="btn btn-outline-dark mx-auto">Sauvegarder <i
+                                    class="far fa-save"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
