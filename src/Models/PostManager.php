@@ -42,6 +42,15 @@ class PostManager extends Manager
         return $requete->fetchAll();
     }
 
+    public function addPost($data)
+    {
+        $dtb = $this->connectDB();
+        $req = $dtb->prepare('INSERT INTO posts (title, author, headline, content, add_date ) VALUES (?,?,?,?, NOW())');
+        $req->execute(array($data['title'], $data['author'], $data['headline'], $data['content']));
+
+        return true;
+    }
+
     public function updatePost($data)
     {
         $dtb = $this->connectDB();
