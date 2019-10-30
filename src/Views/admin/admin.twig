@@ -46,10 +46,9 @@
                                     : </b><em>{{ post.add_date | date("d/m/Y") }}</em><br>
                                 <div class="mt-1">
                                     <a class="btn btnlink btn-sm btn-outline-dark"
-                                        href="../public/?id={{ post.id }}&page=admin!edit">Editer <i
-                                            class="far fa-edit"></i></a>
+                                        href="?id={{ post.id }}&page=admin!edit">Editer <i class="far fa-edit"></i></a>
                                     <a class="btn btnlink btn-sm btn-outline-danger"
-                                        href="../public/?id={{ post.id }}&table=post&page=admin!confirm">Supprimer
+                                        href="?id={{ post.id }}&table=post&page=admin!confirm">Supprimer
                                         <i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
@@ -67,10 +66,10 @@
                         que
                         ses commentaires !<br>Souhaitez-vous continuer ?</p>
                     <a class="btn btnlink btn-outline-danger"
-                        href="../public/?id={{ confirm.id }}&table=post&page=admin!delete">Confirmer <i
+                        href="?id={{ confirm.id }}&table=post&page=admin!delete">Confirmer <i
                             class="fas fa-trash"></i></a>
                     <a class="btn btnlink btn-outline-success"
-                        href="../public/?table=cancel&show=0&page=admin!confirm">Annuler</a>
+                        href="?table=cancel&show=0&page=admin!confirm">Annuler</a>
                 </div>
                 {% endif %}
             </div>
@@ -96,11 +95,11 @@
                                 <div class="mt-1">
                                     {% if comment.validation == 0 %}
                                     <a class="btn btnlink btn-sm btn-outline-dark"
-                                        href="../public/?id={{ comment.id }}&page=admin!validate">
+                                        href="?id={{ comment.id }}&page=admin!validate">
                                         Valider <i class="fas fa-check"></i></a>
                                     {% endif %}
                                     <a class="btn btnlink btn-sm btn-outline-danger"
-                                        href="../public/?id={{ comment.id }}&table=comment&page=admin!confirm">Supprimer
+                                        href="?id={{ comment.id }}&table=comment&page=admin!confirm">Supprimer
                                         <i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
@@ -116,10 +115,10 @@
                     <br>
                     <p class="h5 font-weight-bold mb-3">Souhaitez-vous supprimer ce commentaire ?</p>
                     <a class="btn btnlink btn-outline-danger"
-                        href="../public/?id={{ confirm.id }}&table=comment&page=admin!delete">Confirmer <i
+                        href="?id={{ confirm.id }}&table=comment&page=admin!delete">Confirmer <i
                             class="fas fa-trash"></i></a>
                     <a class="btn btnlink btn-outline-success"
-                        href="../public/?table=cancel&show=1&page=admin!confirm">Annuler</a>
+                        href="?table=cancel&show=1&page=admin!confirm">Annuler</a>
                 </div>
                 {% endif %}
             </div>
@@ -142,7 +141,7 @@
                                 <b>Email : </b>{{ user.email }}
                                 <div class="mt-1">
                                     <a class="btn btnlink btn-sm btn-outline-danger"
-                                        href="../public/?id={{ user.id }}&table=user&page=admin!confirm">Supprimer
+                                        href="?id={{ user.id }}&table=user&page=admin!confirm">Supprimer
                                         <i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
@@ -160,18 +159,17 @@
                         utilisateur.<br>Souhaitez-vous
                         continuer ?</p>
                     <a class="btn btnlink btn-outline-danger"
-                        href="../public/?id={{ confirm.id }}&table=user&page=admin!delete">Confirmer <i
+                        href="?id={{ confirm.id }}&table=user&page=admin!delete">Confirmer <i
                             class="fas fa-trash"></i></a>
                     <a class="btn btnlink btn-outline-success"
-                        href="../public/?table=cancel&show=2&page=admin!confirm">Annuler</a>
+                        href="?table=cancel&show=2&page=admin!confirm">Annuler</a>
                 </div>
                 {% endif %}
             </div>
         </div>
         <div class="tab-pane fade" id="pills-newpost" role="tabpanel" aria-labelledby="pills-newpost-tab">
 
-            <form name="sentMessage" id="editForm" enctype="multipart/form-data" method="post"
-                action="../public/?page=admin!add">
+            <form name="sentMessage" id="editForm" enctype="multipart/form-data" method="post" action="?page=admin!add">
                 <div class="has-success">
                     <div class="col-lg-8 col-md-10 mx-auto mt-2">
                         <h3 class="mb-3 border-bottom col-12">Edition</h3>
