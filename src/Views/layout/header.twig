@@ -1,8 +1,8 @@
 <!-- NAV BAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="../public/">
-            <img src="../public/img/logo.png" class="logo" alt="logo">
+        <a class="navbar-brand" href="">
+            <img src="img/logo.png" class="logo" alt="logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,14 +11,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="../public/">Accueil</a>
+                    <a class="nav-link" href="">Accueil</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="../public/?page=blog!blog">Blog</a>
+                    <a class="nav-link" href="?page=blog!blog">Blog</a>
                 </li>
                 {% if session.user.username is defined %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="../public/?page=user!edit">Mon Profil</a>
+                    <a class="nav-link" href="?page=user!edit">Mon Profil</a>
                 </li>
                 {% endif %}
             </ul>
@@ -32,7 +32,7 @@
             </div>
             {% else %}
             <div>
-                <a class="btn btn-warning ml-auto" href="../public/?page=user!register">S'inscrire | Se connecter</a>
+                <a class="btn btn-warning ml-auto" href="?page=user!register">S'inscrire | Se connecter</a>
             </div>
             {% endif %}
         </div>
@@ -53,7 +53,7 @@
                 Souhaitez-vous réellement fuire du blog ?
             </div>
             <div class="modal-footer">
-                <a class="btn btn-danger float-right" href="../public/?page=user!logout">Se déconnecter</a>
+                <a class="btn btn-danger float-right" href="?page=user!logout">Se déconnecter</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
             </div>
         </div>
