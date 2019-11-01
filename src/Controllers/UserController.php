@@ -41,9 +41,14 @@ use Twig\Error\SyntaxError;
                 }
 
                 if (count($errors) == 0 && count(array_filter($data)) === 6) {
-                    $success = true;
                     $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-                    $register->createUser($data);
+                    $checkStatus = $register->checkUser($data['email']);
+                    if(!$checkStatus) {
+                        $register->createUser($data);
+                        $success = true;
+                    } else {
+                        array_push($errors, 'Une erreur s\'est produite lors de l\'inscription.');
+                    }
                 }
             }
             
