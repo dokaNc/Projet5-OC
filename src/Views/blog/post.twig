@@ -46,7 +46,7 @@
             {% endfor %}
             {% endif %}
             <form class="mt-5" enctype="multipart/form-data" method="post"
-                action="?id={{ post.id }}&p={{ p }}&page=blog!comment">
+                action="?id={{ post.id }}&p={{ p }}&page=blog!comment&token={{ session.token }}">
                 <div class="control-group">
                     <div class="form-group floating-label-form-group controls has-success">
                         <label class="font-weight-bold" for="comment">Commenter :</label>

@@ -18,7 +18,7 @@
                 </li>
                 {% if session.user.username is defined %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="?page=user!edit">Mon Profil</a>
+                    <a class="nav-link" href="?page=user!edit&token={{ session.token }}">Mon Profil</a>
                 </li>
                 {% endif %}
             </ul>
@@ -53,7 +53,7 @@
                 Souhaitez-vous réellement fuire du blog ?
             </div>
             <div class="modal-footer">
-                <a class="btn btn-danger float-right" href="?page=user!logout">Se déconnecter</a>
+                <a class="btn btn-danger float-right" href="?page=user!logout&token={{ session.token }}">Se déconnecter</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
             </div>
         </div>

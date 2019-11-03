@@ -20,6 +20,7 @@ class AdminController extends Controller
     public function adminAction(int $show, $confirm)
     {
         if ($show >= 0 and $show <= 2) {
+            echo $this->session->checkAdmin();
             if ($this->session->checkAdmin()) {
                 $posts = (new PostManager())->getAllPosts();
                 $comments = (new CommentManager())->getAllComments();

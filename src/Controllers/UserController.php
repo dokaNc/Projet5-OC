@@ -95,40 +95,44 @@ use Twig\Error\SyntaxError;
 
         public function editAction()
         {
-            $data = (new UserManager())->getUser($this->session->getUserVar('email'));
-    
-            return $this->render('user/user.twig', array('data' => $data));
+            if ($this->session->isLogged()) {
+                $data = (new UserManager())->getUser($this->session->getUserVar('email'));
+                return $this->render('user/user.twig', array('data' => $data));
+            } else {
+                return $this->render("home.twig", array('session' => filter_var_array($_SESSION)));
+            }
         }
 
         public function updateAction()
         {
-            $data['username'] = (filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS));
-            $data['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
-            $data['password0'] = filter_input(INPUT_POST, 'oldpassword', FILTER_SANITIZE_STRING);
-            $data['password'] = filter_input(INPUT_POST, 'newpassword', FILTER_SANITIZE_STRING);
-            $data['password2'] = filter_input(INPUT_POST, 'passwordconfirm', FILTER_SANITIZE_STRING);
-            $data['oldemail'] = $this->session->getUserVar('email');
-    
-            $userManager = new UserManager();
-            $info = $userManager->getUser($data['oldemail']);
-            $error = $this->verifyUser($data);
-    
-            if (!empty($data['password0']) and empty($data['password']) or empty($data['password0']) and !empty($data['password'])) {
-                $error['password0'] = 'Veuillez remplir tous les champs !';
+            if ($this->session->isLogged()) {
+                $data['username'] = (filter_input(INPUT_POST, 'username', FILTER_SANITIZE_SPECIAL_CHARS));
+                $data['email'] = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
+                $data['password0'] = filter_input(INPUT_POST, 'oldpassword', FILTER_SANITIZE_STRING);
+                $data['password'] = filter_input(INPUT_POST, 'newpassword', FILTER_SANITIZE_STRING);
+                $data['password2'] = filter_input(INPUT_POST, 'passwordconfirm', FILTER_SANITIZE_STRING);
+                $data['oldemail'] = $this->session->getUserVar('email');
+        
+                $userManager = new UserManager();
+                $info = $userManager->getUser($data['oldemail']);
+                $error = $this->verifyUser($data);
+        
+                if (!empty($data['password0']) and empty($data['password']) or empty($data['password0']) and !empty($data['password'])) {
+                    $error['password0'] = 'Veuillez remplir tous les champs !';
+                }
+                if (!empty($data['password0'] and password_verify($data['password0'], $info['password']) === false)) {
+                    $error['password0'] = "Mauvais mot de passe !";
+                }
+                if (!empty($error)) {
+        
+                    return $this->render("user/user.twig", array("error" => $error, "data" => $info));
+                }
+                $data = $this->updateUser($data);
+                $info = $userManager->getUser($data['oldemail']);
+                $status = $this->session->checkStatus($info['status']);
+                $this->session->createSession($info['id'], $info['username'], $info['email'], $status);
+                $this->alert("Modifications enregistrées !");
             }
-            if (!empty($data['password0'] and password_verify($data['password0'], $info['password']) === false)) {
-                $error['password0'] = "Mauvais mot de passe !";
-            }
-            if (!empty($error)) {
-    
-                return $this->render("user/user.twig", array("error" => $error, "data" => $info));
-            }
-            $data = $this->updateUser($data);
-            $info = $userManager->getUser($data['oldemail']);
-            $status = $this->session->checkStatus($info['status']);
-            $this->session->createSession($info['id'], $info['username'], $info['email'], $status);
-            $this->alert("Modifications enregistrées !");
-    
             return $this->render("home.twig", array('session' => filter_var_array($_SESSION)));
         }
 
