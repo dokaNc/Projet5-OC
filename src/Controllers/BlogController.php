@@ -32,25 +32,27 @@ class BlogController extends Controller
 
     public function commentAction()
     {
-        $posts_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
-        $content = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
-        $page = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_NUMBER_INT);
+        if ($this->session->isLogged()) {
+            $posts_id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT);
+            $content = filter_input(INPUT_POST, 'comment', FILTER_SANITIZE_STRING);
+            $page = filter_input(INPUT_GET, 'p', FILTER_SANITIZE_NUMBER_INT);
 
-        if (!empty($posts_id) and !empty($content) and !empty($page)) {
-            $idy = $this->session->getUserVar('id');
-            $author = $this->session->getUserVar('username');
-            $commentManager = new commentManager;
-            $commentManager->addComment($author, $content, $posts_id, $idy);
-            $post = (new PostManager)->getPost($posts_id);
-            $comments = $commentManager->getValidatedComments($posts_id);
-            $wcomments = $commentManager->getWaitingComments($posts_id, $idy);
-            if ($wcomments !== false) {
+            if (!empty($posts_id) and !empty($content) and !empty($page)) {
+                $idy = $this->session->getUserVar('id');
+                $author = $this->session->getUserVar('username');
+                $commentManager = new commentManager;
+                $commentManager->addComment($author, $content, $posts_id, $idy);
+                $post = (new PostManager)->getPost($posts_id);
+                $comments = $commentManager->getValidatedComments($posts_id);
+                $wcomments = $commentManager->getWaitingComments($posts_id, $idy);
+                if ($wcomments !== false) {
 
-                return $this->render('blog/post.twig', array('post' => $post, 'comment' => $comments, 'wcomment' => $wcomments, 'p' => $page));
+                    return $this->render('blog/post.twig', array('post' => $post, 'comment' => $comments, 'wcomment' => $wcomments, 'p' => $page));
+                }
+                return $this->render('blog/post.twig', array('post' => $post, 'comment' => $comments, 'p' => $page));
             }
-            return $this->render('blog/post.twig', array('post' => $post, 'comment' => $comments, 'p' => $page));
-        }
-        return $this->render('blog/home.twig');
+        }       
+        return $this->render('home.twig');
     }
 
     public function readAction()
