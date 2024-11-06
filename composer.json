@@ -16,7 +16,7 @@
     }
   },
   "require": {
-    "twig/twig": "^2.11"
+    "twig/twig": "^2.11 || ^3.0"
   },
   "require-dev": {
     "tracy/tracy": "^2.6"
